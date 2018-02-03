@@ -39,9 +39,7 @@ app.controller('myCtrl', function($scope) {
 		        	for(var movie of data.results){
 		        		$scope.movieList.push(movie);
 		        	}
-		        } else if(data.status_code==25) {
-			        setTimeout(function(page){getMovieList(page);},2000, page);
-                }
+		        }
 		        if(page<pagelimit){
 		        	if(page % reqLimit == 0){
                         if(((page/reqLimit)+2)*reqLimit==pagelimit){
@@ -61,7 +59,11 @@ app.controller('myCtrl', function($scope) {
                     localStorage.setItem("movieList", JSON.stringify($scope.movieList)); 
                     getCPUMovie(false);
                 }	             
-		    });
+		    }).fail(function(error){
+                if(error.status_code==25) {
+			        setTimeout(function(page){getMovieList(page);},2000, page);
+                }
+            });
 	}
     
     $scope.onSelectedMovie = function() {
