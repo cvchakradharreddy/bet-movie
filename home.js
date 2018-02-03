@@ -66,7 +66,7 @@ app.controller('myCtrl', function($scope) {
         if($scope.selectedMovie.vote_average>=$scope.cpuMovie.vote_average){
             $scope.result="You Win!"
            } else {
-                $scope.result="Oops! You loose!"
+                $scope.result="Oops! You lose!"
            }
     }
     
