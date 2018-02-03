@@ -7,7 +7,7 @@ app.controller('myCtrl', function($scope) {
     $scope.result="";
     
     var page = 1;
-    var pagelimit = 200; //though 1000 rows available, limited to 200 since locale storage limit exceeds
+    var pagelimit = 300; //though 1000 rows available, limited to 200 since locale storage limit exceeds
     var reqLimit = 40;
     
     (function triggerGame(){
@@ -39,7 +39,9 @@ app.controller('myCtrl', function($scope) {
 		        	for(var movie of data.results){
 		        		$scope.movieList.push(movie);
 		        	}
-		        } 
+		        } else if(data.status_code==25) {
+			        setTimeout(function(page){getMovieList(page);},2000, page);
+                }
 		        if(page<pagelimit){
 		        	if(page % reqLimit == 0){
                         if(((page/reqLimit)+2)*reqLimit==pagelimit){
@@ -64,9 +66,9 @@ app.controller('myCtrl', function($scope) {
     
     $scope.onSelectedMovie = function() {
         if($scope.selectedMovie.vote_average>=$scope.cpuMovie.vote_average){
-            $scope.result="You Win!"
+            $scope.result="win";
            } else {
-                $scope.result="Oops! You lose!"
+                $scope.result="lost";
            }
     }
     
