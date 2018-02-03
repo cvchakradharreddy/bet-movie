@@ -32,7 +32,10 @@
 	<div class="refreshContainer alignCenter icons">
         <span ng-click="refreshGame()"><i class="fas fa-sync-alt" style="cursor:pointer" ></i></span>
     </div>
-	<h1 class="alignCenter">{{result}}</h1>	
+	<h1 class="alignCenter">
+        <span ng-if="result=='win'">You Win! <i class="fas fa-trophy"></i> <i class="far fa-smile"></i></span>
+        <span ng-if="result=='lost'">Oops! You Lose! <i class="far fa-frown" data-fa-transform="rotate-180"></i></span>
+    </h1>	
 </div>
 
 </body>
