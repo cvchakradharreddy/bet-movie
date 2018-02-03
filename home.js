@@ -7,8 +7,8 @@ app.controller('myCtrl', function($scope) {
     $scope.result="";
     
     var page = 1;
-    var pagelimit = 300; //though 1000 rows available, limited to 200 since locale storage limit exceeds
-    var reqLimit = 40;
+    var pagelimit = 200; //though 1000 rows available, limited to 200 since locale storage limit exceeds
+    var reqLimit = 40; //request limit is 40 on TMD API, so wait at interval 35 with a buffer of 5
     
     (function triggerGame(){
         var list = JSON.parse(localStorage.getItem("movieList"));
@@ -34,23 +34,27 @@ app.controller('myCtrl', function($scope) {
     }
     
 	function getMovieList(page) {
-			$.get("https://api.themoviedb.org/3/discover/movie?api_key=05875cd50919223ef7db595c5c0743c4&page="+page, function(data, status){
-		        if(status=="success"){
+			$.get("https://api.themoviedb.org/3/discover/movie?api_key=05875cd50919223ef7db595c5c0743c4&page="+page, function(data, status, jqXHR){
+                var reqLimitRemaining =  parseInt(jqXHR.getResponseHeader('X-RateLimit-Remaining'),10) || 999999;
+                var retryAfter =  parseInt(jqXHR.getResponseHeader('Retry-After'),10) || 6;
+		        if(data && data.results){
 		        	for(var movie of data.results){
 		        		$scope.movieList.push(movie);
 		        	}
 		        }
 		        if(page<pagelimit){
-		        	if(page % reqLimit == 0){
-                        if(((page/reqLimit)+2)*reqLimit==pagelimit){
+                    if(page % reqLimit == 0){
+                       if(((page/reqLimit)+2)*reqLimit==pagelimit){
                             $scope.cpuMovie={"title":"Almost done!"};
                             $scope.$apply();
                         } else if (((page/reqLimit)+1)*reqLimit==pagelimit){
                             $scope.cpuMovie={"title":"Ready"};
                             $scope.$apply();
                         }
+                    }
+		        	if(reqLimitRemaining == 0){
                         page++;
-			        	setTimeout(function(page){getMovieList(page);},2000, page);
+			        	setTimeout(function(page){getMovieList(page);},retryAfter*1000, page);
 		        	} else {
 		        		page++;
 			        	getMovieList(page);
@@ -59,9 +63,10 @@ app.controller('myCtrl', function($scope) {
                     localStorage.setItem("movieList", JSON.stringify($scope.movieList)); 
                     getCPUMovie(false);
                 }	             
-		    }).fail(function(error){
-                if(error.status_code==25) {
-			        setTimeout(function(page){getMovieList(page);},2000, page);
+		    }).fail(function(error, status){
+                var retryAfter =  parseInt(error.getResponseHeader('Retry-After'),10) || 2;
+                if(error && error.status==429) {
+			        setTimeout(function(page){getMovieList(page);},(retryAfter+1)*1000, page);
                 }
             });
 	}
