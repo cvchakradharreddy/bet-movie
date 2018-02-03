@@ -15,7 +15,7 @@ Note: Internet connection is expected to get jQuery, font-awesome and angular th
 
 
 #### Implimenation:
-HTML5, CSS, jQuery, font-awesome and AngularJS
+HTML5, CSS, jQuery, font-awesome and AngularJS            
 API: https://www.themoviedb.org/
 
 #### Acknowledgement:
