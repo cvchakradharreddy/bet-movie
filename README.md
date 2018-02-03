@@ -1,5 +1,5 @@
 # bet-movie
-A small and interesting game built using the movie database API
+A small and interesting game built using web technologies and the movie database API
 
 #### Set-up
 1. Download/Clone repository
