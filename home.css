@@ -1,0 +1,44 @@
+.alignCenter {
+    text-align: center;
+}
+.container {
+    margin: auto; 
+    width:70%;
+}
+.userContainer {
+    display: inline-block; 
+    background-color: cadetblue; 
+    width:35%; 
+    height: 100px;
+    padding: 60px;
+}
+.cpuContainer {
+    display: inline-block; 
+    background-color: antiquewhite; 
+    width:35%; 
+    height: 100px;
+    padding: 60px;
+}
+.refreshContainer {
+    padding: 20px;
+}
+.icons{
+    font-size: 30px;
+}
+.userMovie{
+    padding: 20px;
+}
+.userSelectMovie{
+    text-align-last: center; 
+    width: 100%;
+    font-size: 12px;
+}
+.cpuMovieTitle {
+    padding: 20px;
+}
+.user {
+    padding: 0px 20px;
+}
+.cpu {
+    padding: 0px 20px;
+}
