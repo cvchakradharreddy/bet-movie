@@ -20,3 +20,8 @@ API: https://www.themoviedb.org/
 
 #### Acknowledgement:
 Implemented as part of http://challenge2018.kikoda.com/
+
+
+###### Homepage Screenshot
+
+![homepage](screenshot.png "This is how 'bet-movie' homepage looks like")
