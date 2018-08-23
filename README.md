@@ -14,7 +14,7 @@ Note: Internet connection is expected to get jQuery, font-awesome and angular th
 3. If user can make a best bet, he/she wins! 
 
 
-#### Implimenation:
+#### Implementation:
 HTML5, CSS, jQuery, font-awesome and AngularJS            
 API: https://www.themoviedb.org/
 
