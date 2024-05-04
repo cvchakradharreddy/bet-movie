@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Kilroy</title>
-<link rel="stylesheet" type="text/css" href="home.css"></link>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="home.js"></script>
+    <meta charset="UTF-8">
+    <title>bet-movie</title>
+    <link rel="stylesheet" type="text/css" href="home.css">
+    </link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="home.js"></script>
 </head>
+
 <body>
 
 
-<div id="main" ng-app="myApp" ng-controller="myCtrl">
-    <h1 class="alignCenter">Hello Kikoda!</h1>
-    <h3 class="alignCenter">Choose the best movie <i class="fas fa-film"></i></h3>
-    <div class="container">
-	   <div class="userContainer">
-        <div class="alignCenter icons user"><i class="fas fa-user"></i></div>
-        <div class="userMovie">
-            <select class="userSelectMovie" ng-model="selectedMovie" ng-options="movie as movie.title for movie in movieList" ng-change="onSelectedMovie()">
-            <option value="" disabled selected>Select a movie</option>
-            </select>
+    <div id="main" ng-app="myApp" ng-controller="myCtrl">
+        <h1 class="alignCenter">Hello Movie buff!</h1>
+        <h3 class="alignCenter">Choose the best movie <i class="fas fa-film"></i></h3>
+        <div class="container">
+            <div class="userContainer">
+                <div class="alignCenter icons user"><i class="fas fa-user"></i></div>
+                <div class="userMovie">
+                    <select class="userSelectMovie" ng-model="selectedMovie"
+                        ng-options="movie as movie.title for movie in movieList" ng-change="onSelectedMovie()">
+                        <option value="" disabled selected>Select a movie</option>
+                    </select>
+                </div>
+            </div>
+            <div class="cpuContainer">
+                <div class="alignCenter icons cpu"><i class="fas fa-desktop"></i></div>
+                <div class="alignCenter cpuMovieTitle">{{cpuMovie.title}}</div>
+            </div>
         </div>
-       </div>
-       <div class="cpuContainer">
-           <div class="alignCenter icons cpu"><i class="fas fa-desktop"></i></div>
-            <div class="alignCenter cpuMovieTitle">{{cpuMovie.title}}</div>
-       </div>
+        <div class="refreshContainer alignCenter icons">
+            <span ng-click="refreshGame()"><i class="fas fa-sync-alt" style="cursor:pointer"></i></span>
+        </div>
+        <h1 class="alignCenter">
+            <span ng-if="result=='win'">You Win! <i class="fas fa-trophy"></i> <i class="far fa-smile"></i></span>
+            <span ng-if="result=='lost'">Oops! You Lose! <i class="far fa-frown"
+                    data-fa-transform="rotate-180"></i></span>
+        </h1>
     </div>
-	<div class="refreshContainer alignCenter icons">
-        <span ng-click="refreshGame()"><i class="fas fa-sync-alt" style="cursor:pointer" ></i></span>
-    </div>
-	<h1 class="alignCenter">
-        <span ng-if="result=='win'">You Win! <i class="fas fa-trophy"></i> <i class="far fa-smile"></i></span>
-        <span ng-if="result=='lost'">Oops! You Lose! <i class="far fa-frown" data-fa-transform="rotate-180"></i></span>
-    </h1>	
-</div>
 
 </body>
+
 </html>
